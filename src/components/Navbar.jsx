@@ -1,20 +1,26 @@
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import profile from '../assets/profile.png';
 
-const Navbar = () => {
+function Navbar() {
   return (
-    <nav className="flex flex-wrap items-center justify-between bg-white py-2 px-5 ring-1 ring-slate-900/5 relative">
-      <div className="flex  items-center flex-shrink-0">
-        <img src={logo} alt="Logo" className="h-20 w-22" />
+    <nav className="navbar">
+    <div className="nav-brand">
+        <img src={logo} alt="GadgetGrade Logo" className="nav-logo" />
+        <h1>Gadget Grade</h1>
       </div>
-      <div className="uppercase text-center text-3xl font-bold text-white bg-slate-500 px-5 py-3 rounded-md tracking-widest max-xs:text-lg max-xs:py-2 max-xs:px-3 max-xs:w-full">
-      ADMIN PANEL
-      </div>
-      <div className="flex items-center max-xs:w-full">
-        <img src={profile} alt="Profile" className="h-18 w-18 rounded-full max-xs:h-8 max-xs:w-8" />
+      <div className="nav-links">
+        <Link to="/" className="nav-button">Home</Link>
+        <Link to="/see/smartphones" className="nav-button">View Reviews</Link>
+        <Link to="/compare/smartphones" className="nav-button">Compare</Link>
+        <Link to="/rewards" className="nav-button">Rewards</Link>
+        <div className="nav-button">
+        {localStorage.getItem('auth-token') ? <Link onClick={() => {localStorage.removeItem('auth-token'); window.location.replace('/')}}to={'logout'} className={"btn_secondary_rounded flexCenter gap-x-2 medium-16 #007bff"}> Logout </Link> :
+        <Link to={'login'} className={"btn_secondary_rounded gap-x-2 medium-16"}> Login </Link> }
+        </div>
       </div>
     </nav>
   );
-};
+}
 
 export default Navbar;
+
